@@ -9,10 +9,13 @@ export class HttpService {
 
   }
   getTasks(){
-  return this._http.get('/tasks');
+    return this._http.get('/tasks');
   }
-  getATask(){
-      let task = this._http.get('/tasks/5c08421a383d8329104e7e3c');
-      task.subscribe(data => console.log("Got a task!", data));
+  getATask(id){
+    return this._http.get(`/tasks/${id}/`);
+  }
+  postToServer(num){
+
+    return this._http.post('/tasks', num);
   }
 }

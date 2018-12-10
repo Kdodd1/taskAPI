@@ -2,8 +2,13 @@
 <div style="text-align:center">
   <h1>
     Restful Tasks API
+<button (click)="onButtonClick()" >Click me!</button>
   </h1>
-  <p *ngFor="let task of tasks">{{task.title}} - {{task.description}}</p>
+
+  <p *ngFor="let task of tasks">{{task.title}}
+    <button (click)="getDescriptionOnClick(task._id)">Show</button>
+  </p>
+  <p *ngFor="let task of task">description: {{task.description}}</p>
 </div>
 
 

@@ -8,7 +8,7 @@ class Tasks{
         console.log("Returned errors", err);
         res.json({message: "error", error: err})
       }else{
-        res.json({message: "sucess", data: tasks})
+        res.json({message: "success", data: tasks})
       }
     })
   }

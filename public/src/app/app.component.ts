@@ -9,10 +9,8 @@ import { HttpService } from './http.service';
 export class AppComponent implements OnInit {
   constructor(private _httpService: HttpService){}
   tasks = [];
-
+  task = [];
   ngOnInit(){
-
-    this.getTasksFromService();
   }
   getTasksFromService(){
     let observable = this._httpService.getTasks();
@@ -21,4 +19,18 @@ export class AppComponent implements OnInit {
       this.tasks = data["data"];
     });
   }
-}
+  getATask(id){
+    let observable = this._httpService.getATask(id);
+    observable.subscribe(data => {
+      console.log("got a task!", data)
+      this.task = data["data"];
+    });
+  }
+  onButtonClick(): void {
+    this.getTasksFromService();
+  }
+  getDescriptionOnClick(id: String): void {
+    this.getATask(id);
+    console.log(id);
+    }
+  }
