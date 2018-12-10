@@ -1,14 +1,29 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
-    Restful Tasks API
-<button (click)="onButtonClick()" >Click me!</button>
+    Task List
+<button (click)="onButtonClick()" >Show Tasks</button>
   </h1>
-
-  <p *ngFor="let task of tasks">{{task.title}}
-    <button (click)="getDescriptionOnClick(task._id)">Show</button>
+  <p *ngFor="let task of tasks">{{task.title}} - {{task.description}}
+    <button (click)="getDescriptionOnClick(task._id)">Edit</button>
+    <button (click)='deleteATask(task._id)'>Delete</button>
   </p>
-  <p *ngFor="let task of task">description: {{task.description}}</p>
+  <form  *ngFor="let task of task" (submit)="updateATask(task._id, task)">
+    <h2>Edit Task: </h2>
+    <h3>Title: </h3>
+    <input type="text" name="task.title" [(ngModel)]="task.title"/>
+    <h3>Description: </h3>
+    <input type="text" name="task.description" [(ngModel)]="task.description"/>
+    <input type="submit" name="Update Task"/>
+  </form>
+  <h1>Create New Task: </h1>
+  <form (submit)="addTask()">
+    <h3>Title: </h3>
+    <input type="text" name="newTask.title" [(ngModel)]="newTask.title"/>
+    <h3>Description: </h3>
+    <input type="text" name="newTask.description" [(ngModel)]="newTask.description"/>
+    <input type="submit" value="Create Task"/>
+  </form>
 </div>
 
 

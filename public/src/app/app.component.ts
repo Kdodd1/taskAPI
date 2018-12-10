@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   tasks = [];
   task = [];
   ngOnInit(){
+    this.newTask = { title: "", description: ""}
+
   }
   getTasksFromService(){
     let observable = this._httpService.getTasks();
@@ -25,6 +27,30 @@ export class AppComponent implements OnInit {
       console.log("got a task!", data)
       this.task = data["data"];
     });
+  }
+  addTask(){
+    let observable = this._httpService.addTask(this.newTask);
+    observable.subscribe(data => {
+      console.log(data);
+      this.newTask = {title: "", description: ""}
+      this.getTasksFromService();
+    })
+  }
+  deleteATask(id){
+    let observable = this._httpService.deleteATask(id);
+    observable.subscribe(data => {
+      console.log("delete a  task", data);
+      this.getTasksFromService();
+    })
+  }
+  updateATask(id, task){
+
+    let observable = this._httpService.updateATask(id, task);
+    observable.subscribe(data => {
+      console.log("updated a task", data);
+      this.getTasksFromService();
+    })
+
   }
   onButtonClick(): void {
     this.getTasksFromService();
